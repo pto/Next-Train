@@ -23,7 +23,7 @@
 }
 
 #pragma mark -
-#pragma mark Application lifecycle
+#pragma mark UIApplicationDelegate methods
 
 - (void)applicationDidFinishLaunching:(UIApplication *)application {
 	[window addSubview:[navigationController view]];
@@ -42,6 +42,10 @@
 	else
 		[[NSFileManager defaultManager] removeItemAtPath:[self dataFilePath]
 												   error:NULL];
+}
+
+- (void)applicationDidEnterBackground:(UIApplication *)application {
+    [self applicationWillTerminate:application];
 }
 
 #pragma mark -
