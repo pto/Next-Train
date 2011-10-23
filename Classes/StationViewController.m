@@ -7,7 +7,7 @@
 //
 
 #import "StationViewController.h"
-#import "RootViewController.h"
+#import "ViewController.h"
 
 @implementation StationViewController
 
@@ -29,9 +29,6 @@
 	NSURL *stationUrl = [[NSURL alloc] initWithString:stationString];
 	NSURLRequest *urlRequest = [[NSURLRequest alloc] initWithURL:stationUrl];
 	[self.webView loadRequest:urlRequest];
-	[stationString release];
-	[stationUrl release];
-	[urlRequest release];
 }
 
 /*
@@ -54,12 +51,6 @@
 	webView = nil;
 }
 
-- (void)dealloc {
-	[stationArray release];
-	[webView release];
-    [super dealloc];
-}
-
 #pragma mark UIWebViewDelegate methods
 
 - (void)webViewDidStartLoad:(UIWebView *)webView {
@@ -70,9 +61,7 @@
 	[activityIndicatorView startAnimating];
 	UIBarButtonItem *barButtonItem = [[UIBarButtonItem alloc]
 									  initWithCustomView:activityIndicatorView];
-	[activityIndicatorView release];
 	self.navigationItem.rightBarButtonItem = barButtonItem;
-	[barButtonItem release];	
 }
 
 - (void)webViewDidFinishLoad:(UIWebView *)webView {
@@ -83,7 +72,6 @@
 		 target:self
 		 action:@selector(refreshPage)];
 	self.navigationItem.rightBarButtonItem = barButtonItem;
-	[barButtonItem release];
 }
 
 - (void)webView:(UIWebView *)webView didFailLoadWithError:(NSError *)error {
@@ -91,7 +79,6 @@
 						 initWithFormat:@"Cannot display: %@.",
 						 error.localizedDescription];
 	[self.webView loadHTMLString:message baseURL:nil];
-	[message release];
 }
 
 @end

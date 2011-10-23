@@ -9,13 +9,10 @@
 #import <UIKit/UIKit.h>
 
 
-@interface StationViewController : UIViewController <UIWebViewDelegate> {
-	NSArray *stationArray;
-	UIWebView *webView;
-}
+@interface StationViewController : UIViewController <UIWebViewDelegate> 
 
-@property (nonatomic, retain) NSArray *stationArray;
-@property (nonatomic, retain) IBOutlet UIWebView *webView;
+@property (strong, nonatomic) NSArray *stationArray;
+@property (strong, nonatomic) IBOutlet UIWebView *webView;
 
 - (void)refreshPage;
 
