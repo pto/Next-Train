@@ -37,7 +37,6 @@
 			(StationViewController *)self.navigationController.topViewController;
 		NSArray *stationArray = stationViewController.stationArray;
 		[stationArray writeToFile:[self dataFilePath] atomically:YES];
-		[stationArray release];
 	}
 	else
 		[[NSFileManager defaultManager] removeItemAtPath:[self dataFilePath]
