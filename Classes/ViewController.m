@@ -27,7 +27,7 @@
 										 animated:animated];
 }
 
-#pragma mark - View lifecycle
+#pragma mark - UIViewController methods
 
 - (void)viewDidLoad {
 	[super viewDidLoad];
@@ -70,6 +70,15 @@
 		if ([stationArray count] > 0)
 			[self pushStationViewController:stationArray animated:NO];
 	}
+}
+
+- (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
+{
+    if ([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPhone) {
+        return (interfaceOrientation != UIInterfaceOrientationPortraitUpsideDown);
+    } else {
+        return YES;
+    }
 }
 
 #pragma mark - UITableViewDataSource methods

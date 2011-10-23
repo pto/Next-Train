@@ -12,7 +12,7 @@
 @interface StationViewController : UIViewController <UIWebViewDelegate> 
 
 @property (strong, nonatomic) NSArray *stationArray;
-@property (strong, nonatomic) IBOutlet UIWebView *webView;
+@property (weak, nonatomic) IBOutlet UIWebView *webView;
 
 - (void)refreshPage;
 

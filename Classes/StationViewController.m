@@ -14,46 +14,40 @@
 @synthesize stationArray;
 @synthesize webView;
 
-- (void)viewDidLoad {
-    [super viewDidLoad];
-	self.title = [stationArray objectAtIndex:kStationNameIndex];
-	[self refreshPage];
-}
-
-- (void)refreshPage {
+- (void)refreshPage 
+{
 	NSString *stationId = [stationArray objectAtIndex:kStationIdIndex];
-	NSString *stationString =
-	[[NSString alloc] initWithFormat:
-	 @"http://www.wmata.com/rider_tools/pids/showpid.cfm?station_id=%@",
-	 stationId];
+	NSString *stationString = [[NSString alloc] initWithFormat:
+                               @"http://www.wmata.com/rider_tools/pids/showpid.cfm?station_id=%@",
+                               stationId];
 	NSURL *stationUrl = [[NSURL alloc] initWithString:stationString];
 	NSURLRequest *urlRequest = [[NSURLRequest alloc] initWithURL:stationUrl];
 	[self.webView loadRequest:urlRequest];
 }
 
-/*
-// Override to allow orientations other than the default portrait orientation.
-- (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation {
+#pragma mark - UIViewController methods
+
+- (void)viewDidLoad
+{
+    [super viewDidLoad];
+	self.title = [stationArray objectAtIndex:kStationNameIndex];
+	[self refreshPage];
+}
+
+- (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
+{
     // Return YES for supported orientations
-    return (interfaceOrientation == UIInterfaceOrientationPortrait);
-}
-*/
-
-- (void)didReceiveMemoryWarning {
-	// Releases the view if it doesn't have a superview.
-	[super didReceiveMemoryWarning];
-	
-	// Release any cached data, images, etc that aren't in use.
+    if ([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPhone) {
+        return (interfaceOrientation != UIInterfaceOrientationPortraitUpsideDown);
+    } else {
+        return YES;
+    }
 }
 
-- (void)viewDidUnload {
-	stationArray = nil;
-	webView = nil;
-}
+#pragma mark - UIWebViewDelegate methods
 
-#pragma mark UIWebViewDelegate methods
-
-- (void)webViewDidStartLoad:(UIWebView *)webView {
+- (void)webViewDidStartLoad:(UIWebView *)webView 
+{
 	// Display activity indicator
 	UIActivityIndicatorView *activityIndicatorView =
 	[[UIActivityIndicatorView alloc]
@@ -64,7 +58,8 @@
 	self.navigationItem.rightBarButtonItem = barButtonItem;
 }
 
-- (void)webViewDidFinishLoad:(UIWebView *)webView {
+- (void)webViewDidFinishLoad:(UIWebView *)webView
+{
 	// Display reload button
 	UIBarButtonItem *barButtonItem =
 		[[UIBarButtonItem alloc]
@@ -74,7 +69,8 @@
 	self.navigationItem.rightBarButtonItem = barButtonItem;
 }
 
-- (void)webView:(UIWebView *)webView didFailLoadWithError:(NSError *)error {
+- (void)webView:(UIWebView *)webView didFailLoadWithError:(NSError *)error
+{
 	NSString *message = [[NSString alloc]
 						 initWithFormat:@"Cannot display: %@.",
 						 error.localizedDescription];

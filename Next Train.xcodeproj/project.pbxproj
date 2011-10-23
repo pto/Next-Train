@@ -14,6 +14,7 @@
 		55094890118C62A900716CB0 /* iPadDefault.png in Resources */ = {isa = PBXBuildFile; fileRef = 5509488F118C62A900716CB0 /* iPadDefault.png */; };
 		552E0F0811318B6A008E3BB1 /* BlackiPhoneDefault.png in Resources */ = {isa = PBXBuildFile; fileRef = 552E0F0711318B6A008E3BB1 /* BlackiPhoneDefault.png */; };
 		552E117611320232008E3BB1 /* iPhoneDefault.png in Resources */ = {isa = PBXBuildFile; fileRef = 552E117511320232008E3BB1 /* iPhoneDefault.png */; };
+		55346F101454C54800B87975 /* iPadDefault-Landscape.png in Resources */ = {isa = PBXBuildFile; fileRef = 55346F0F1454C54800B87975 /* iPadDefault-Landscape.png */; };
 		556EE33A11F679AA004CF618 /* Icon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 556EE33911F679AA004CF618 /* Icon@2x.png */; };
 		55A5C65713062F89000A9185 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 55A5C65613062F89000A9185 /* UIKit.framework */; };
 		55A5C65B13062F9A000A9185 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 55A5C65A13062F9A000A9185 /* CoreGraphics.framework */; };
@@ -41,6 +42,7 @@
 		5509488F118C62A900716CB0 /* iPadDefault.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = iPadDefault.png; sourceTree = "<group>"; };
 		552E0F0711318B6A008E3BB1 /* BlackiPhoneDefault.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = BlackiPhoneDefault.png; sourceTree = "<group>"; };
 		552E117511320232008E3BB1 /* iPhoneDefault.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = iPhoneDefault.png; sourceTree = "<group>"; };
+		55346F0F1454C54800B87975 /* iPadDefault-Landscape.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "iPadDefault-Landscape.png"; sourceTree = "<group>"; };
 		556EE33911F679AA004CF618 /* Icon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Icon@2x.png"; sourceTree = "<group>"; };
 		55A5C65613062F89000A9185 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		55A5C65A13062F9A000A9185 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -127,6 +129,7 @@
 				552E0F0711318B6A008E3BB1 /* BlackiPhoneDefault.png */,
 				552E117511320232008E3BB1 /* iPhoneDefault.png */,
 				5509488F118C62A900716CB0 /* iPadDefault.png */,
+				55346F0F1454C54800B87975 /* iPadDefault-Landscape.png */,
 			);
 			name = Resources;
 			sourceTree = "<group>";
@@ -219,6 +222,7 @@
 				552E117611320232008E3BB1 /* iPhoneDefault.png in Resources */,
 				55094890118C62A900716CB0 /* iPadDefault.png in Resources */,
 				556EE33A11F679AA004CF618 /* Icon@2x.png in Resources */,
+				55346F101454C54800B87975 /* iPadDefault-Landscape.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
