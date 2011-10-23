@@ -40,10 +40,6 @@
 	<string>1.0</string>
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
-	<key>UILaunchImageFile</key>
-	<string>iPhoneDefault.png</string>
-	<key>UILaunchImageFile~ipad</key>
-	<string>iPadDefault.png</string>
 	<key>UIRequiredDeviceCapabilities</key>
 	<array>
 		<string>armv7</string>
