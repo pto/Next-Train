@@ -27,7 +27,7 @@
 
 #pragma mark - UIViewController methods
 
-- (void)viewDidLoad
+- (void)viewWillAppear:(BOOL)animated
 {
     [super viewDidLoad];
 	self.title = [stationArray objectAtIndex:kStationNameIndex];

@@ -12,18 +12,24 @@
 
 @implementation ViewController
 
-@synthesize fullStationDictionary, filteredStationDictionary,
-			fullSectionIndexTitles, filteredSectionIndexTitles, lineImages;
+@synthesize fullStationDictionary = _fullStationDictionary;
+@synthesize filteredStationDictionary = _filteredStationDictionary;
+@synthesize fullSectionIndexTitles = _fullSectionIndexTitles;
+@synthesize filteredSectionIndexTitles = _filteredSectionIndexTitles;
+@synthesize lineImages = _lineImages;
+@synthesize stationViewController = _stationViewController;
 
 // Display a specific train station's information
 -(void)pushStationViewController:(NSArray *)stationArray
 						animated:(BOOL)animated
 {
-	StationViewController *stationViewController = [[StationViewController alloc] 
-                                                    initWithNibName:@"StationViewController"
-                                                    bundle:nil];
-	stationViewController.stationArray = stationArray;
-	[self.navigationController pushViewController:stationViewController
+    if (self.stationViewController == nil) {
+        self.stationViewController = [[StationViewController alloc]
+                                      initWithNibName:@"StationViewController"
+                                               bundle:nil];
+    }
+	self.stationViewController.stationArray = stationArray;
+	[self.navigationController pushViewController:self.stationViewController
 										 animated:animated];
 }
 
@@ -72,6 +78,16 @@
 	}
 }
 
+- (void)viewDidUnload {
+    self.fullStationDictionary = nil;
+    self.filteredStationDictionary = nil;
+    self.fullSectionIndexTitles = nil;
+    self.filteredSectionIndexTitles = nil;
+    self.lineImages = nil;
+    self.stationViewController = nil;
+    [self viewDidUnload];
+}
+
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
 {
     if ([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPhone) {
@@ -85,20 +101,20 @@
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
 	if (tableView == self.searchDisplayController.searchResultsTableView)
-		return [filteredSectionIndexTitles count];
+		return [self.filteredSectionIndexTitles count];
 	else
-		return [fullSectionIndexTitles count];
+		return [self.fullSectionIndexTitles count];
 }
 
 - (NSInteger)tableView:(UITableView *)tableView
  numberOfRowsInSection:(NSInteger)section {
 	if (tableView == self.searchDisplayController.searchResultsTableView) {
 		NSString *sectionTitle = 
-			[filteredSectionIndexTitles objectAtIndex:section];
-		return [[filteredStationDictionary objectForKey:sectionTitle] count];
+			[self.filteredSectionIndexTitles objectAtIndex:section];
+		return [[self.filteredStationDictionary objectForKey:sectionTitle] count];
 	} else {	
-		NSString *sectionTitle = [fullSectionIndexTitles objectAtIndex:section];
-		return [[fullStationDictionary objectForKey:sectionTitle] count];
+		NSString *sectionTitle = [self.fullSectionIndexTitles objectAtIndex:section];
+		return [[self.fullStationDictionary objectForKey:sectionTitle] count];
 	}
 }
 
@@ -106,7 +122,7 @@
 	if (tableView == self.searchDisplayController.searchResultsTableView)
 		return nil; // Don't display an index
 	else
-		return fullSectionIndexTitles;
+		return self.fullSectionIndexTitles;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView
@@ -124,11 +140,11 @@
 	NSDictionary *dict;
 	NSArray *titles;
 	if (tableView == self.searchDisplayController.searchResultsTableView) {
-		dict = filteredStationDictionary;
-		titles = filteredSectionIndexTitles;
+		dict = self.filteredStationDictionary;
+		titles = self.filteredSectionIndexTitles;
 	} else {
-		dict = fullStationDictionary;
-		titles = fullSectionIndexTitles;
+		dict = self.fullStationDictionary;
+		titles = self.fullSectionIndexTitles;
 	}
 	
 	// Populate the station name
@@ -147,7 +163,7 @@
 		 initWithFrame:CGRectMake(0.0, 0.0, 18.0 * numberOfLines, 16.0)];
 	for (int i = 0; i < numberOfLines; i++) {
 		NSString *lineName = [lineArray objectAtIndex:i];
-		UIImage *lineImage = [lineImages objectForKey:lineName];
+		UIImage *lineImage = [self.lineImages objectForKey:lineName];
 		UIImageView *imageView = [[UIImageView alloc] initWithImage:lineImage];
 		imageView.frame = CGRectMake(18.0 * i, 0.0, 16.0, 16.0);
 		[accessoryView addSubview:imageView];
@@ -161,9 +177,9 @@ titleForHeaderInSection:(NSInteger)section {
 	NSString *result;
 
 	if (tableView == self.searchDisplayController.searchResultsTableView)
-		result = [filteredSectionIndexTitles objectAtIndex:section];
+		result = [self.filteredSectionIndexTitles objectAtIndex:section];
 	else
-		result = [fullSectionIndexTitles objectAtIndex:section];
+		result = [self.fullSectionIndexTitles objectAtIndex:section];
 
 	return (result == UITableViewIndexSearch) ? nil : result;
 }
@@ -186,11 +202,11 @@ didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
 	NSDictionary *dict;
 	NSArray *titles;
 	if (tableView == self.searchDisplayController.searchResultsTableView) {
-		dict = filteredStationDictionary;
-		titles = filteredSectionIndexTitles;
+		dict = self.filteredStationDictionary;
+		titles = self.filteredSectionIndexTitles;
 	} else {
-		dict = fullStationDictionary;
-		titles = fullSectionIndexTitles;
+		dict = self.fullStationDictionary;
+		titles = self.fullSectionIndexTitles;
 	}
 
 	NSUInteger section = [indexPath section];
@@ -209,7 +225,7 @@ shouldReloadTableForSearchString:(NSString *)searchString
     [self.filteredStationDictionary removeAllObjects];
 	
 	// Load up the stations that match the search string
-	for (NSArray *letter in [fullStationDictionary allValues]) {
+	for (NSArray *letter in [self.fullStationDictionary allValues]) {
 		NSMutableArray *searchLetter = [[NSMutableArray alloc] init];
 		for (NSArray *station in letter) {
 			NSString *name = [station objectAtIndex:kStationNameIndex];
@@ -224,12 +240,12 @@ shouldReloadTableForSearchString:(NSString *)searchString
 			NSString *firstName = [firstStation objectAtIndex:kStationNameIndex];
 			NSString *firstLetter = 
 			[firstName substringWithRange:NSMakeRange(0, 1)];
-			[filteredStationDictionary setObject:searchLetter forKey:firstLetter];
+			[self.filteredStationDictionary setObject:searchLetter forKey:firstLetter];
 		}
 	}	
 	
 	// Build the matching index (no UITableViewIndexSearch needed)
-	NSArray *indexes = [[filteredStationDictionary allKeys]
+	NSArray *indexes = [[self.filteredStationDictionary allKeys]
 						sortedArrayUsingSelector:@selector(compare:)];
 	self.filteredSectionIndexTitles = indexes;
 

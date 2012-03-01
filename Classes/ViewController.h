@@ -14,6 +14,8 @@
 
 #define kDataFilename @"data.plist"
 
+@class StationViewController;
+
 @interface ViewController : UITableViewController <UISearchDisplayDelegate>
 
 @property (strong, nonatomic) NSDictionary *fullStationDictionary;
@@ -21,6 +23,7 @@
 @property (strong, nonatomic) NSArray *fullSectionIndexTitles;
 @property (strong, nonatomic) NSArray *filteredSectionIndexTitles;
 @property (strong, nonatomic) NSDictionary *lineImages;
+@property (strong, nonatomic) StationViewController *stationViewController;
 
 - (void)pushStationViewController:(NSArray *)stationArray
 						 animated:(BOOL)animated;
